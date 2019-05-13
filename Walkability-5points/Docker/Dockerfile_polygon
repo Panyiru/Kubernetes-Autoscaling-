@@ -1,0 +1,6 @@
+FROM baseimage
+
+RUN chmod +x start_polygon.sh
+
+ENTRYPOINT ["/app/start_polygon.sh"]
+

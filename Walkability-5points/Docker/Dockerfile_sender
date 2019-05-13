@@ -1,0 +1,5 @@
+FROM baseimage
+
+RUN chmod +x start_sender.sh
+
+ENTRYPOINT ["/app/start_sender.sh"]
