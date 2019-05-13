@@ -1,0 +1,38 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: sendconnectivity-deployment
+
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.service: sendconnectivity
+
+  template:
+    metadata:
+      labels:
+        io.kompose.service: sendconnectivity
+      name: sendconnectivity
+
+    spec:
+      containers:
+        - image: vivian94/walkability1000:sendconnectivity
+          name: sendconnectivity
+          resources:
+            limits:
+              cpu: 500m
+          volumeMounts:
+            - mountPath: /app/src/main/java/org/mccaughey/output/
+              name: sendpolygon-hostpath0
+            - mountPath: /root/.m2
+              name: sendpolygon-hostpath1
+
+      restartPolicy: Always
+      volumes:
+        - hostPath:
+            path:  /mnt/sharedfolder/output
+          name: sendpolygon-hostpath0
+        - hostPath:
+            path:  /home/ubuntu/.m2
+          name: sendpolygon-hostpath1
