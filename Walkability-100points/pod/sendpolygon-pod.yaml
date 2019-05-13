@@ -1,0 +1,25 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  creationTimestamp: null
+  labels:
+    io.kompose.service: sendpolygon
+  name: sendpolygon
+spec:
+  containers:
+  - image: vivian94/walkability100v2:sendpolygon
+    name: sendpolygon
+    volumeMounts:
+    - mountPath: /app/src/main/java/org/mccaughey/output/
+      name: sendpolygon-hostpath0
+    - mountPath: /root/.m2
+      name: sendpolygon-hostpath1
+  restartPolicy: OnFailure
+  volumes:
+  - hostPath:
+      path: /mnt/sharedfolder/output
+    name: sendpolygon-hostpath0
+  - hostPath:
+      path: /home/ubuntu/.m2
+    name: sendpolygon-hostpath1
+status: {}
